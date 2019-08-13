@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<sunarc_checkout_skip> 
+        <reference name="content">
+			<block type="checkout/onepage" name="checkout.onepage.reduced.setup" template="sunarc/skipcheckout/onepage.phtml" />
+		</reference>	
+	</sunarc_checkout_skip>	
+	
+	<sunarc_checkout_skip_forceguestonly> 
+
+        <reference name="content">
+			<reference name="checkout.onepage">
+				<remove name="checkout.onepage.login" />
+			</reference>
+		</reference>
+		
+	</sunarc_checkout_skip_forceguestonly> 
+
+	<sunarc_checkout_skip_skip_paymentmethod> 
+
+        <reference name="content">
+			<reference name="checkout.onepage">
+				<remove name="checkout.onepage.payment" />
+			</reference>
+		</reference>
+		
+	</sunarc_checkout_skip_skip_paymentmethod> 
+
+	<sunarc_checkout_skip_skip_shippingmethod> 
+
+        <reference name="content">
+			<reference name="checkout.onepage">
+				<remove name="checkout.onepage.shipping_method" />
+			</reference>
+		</reference>
+		
+	</sunarc_checkout_skip_skip_shippingmethod> 
+    
+   
+
+</layout>

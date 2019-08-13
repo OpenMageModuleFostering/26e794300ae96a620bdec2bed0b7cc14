@@ -1,0 +1,52 @@
+<div class="multiple-checkout">
+		<span></span>
+	</div>
+
+	<input type="hidden" name="suite_ms_payment_method" id="suite_ms_payment_method" value="<?php echo Mage::helper('sunarc_skipcheckout')->getPaymentMethod(); ?>" />
+<?php /* -- END SAGEPAY INTEGRATION -- */ ?>
+
+
+<!-- REQUIRED -->
+<form action="" id="co-payment-form">
+    <fieldset>
+		<input name="payment[method]" type="hidden" value="<?php echo Mage::helper('sunarc_skipcheckout')->getPaymentMethod(); ?>" checked="checked" />
+		<span id="payment-buttons-container"></span>
+    </fieldset>
+</form>
+
+<!-- Sunarc_Skipcheckout V<?php echo Mage::getConfig()->getNode()->modules->Sunarc_Skipcheckout->version; ?> -->
+
+<script type="text/javascript">
+//<![CDATA[
+
+<?php 	// get an instance of the URL helper class 
+	$url_helper = $this->helper('sunarc_skipcheckout/url');
+?>           
+
+	
+	var checkout = new Checkout(accordion,{
+        progress: '<?php echo $url_helper->getProgressUrl(); ?>',
+        review: '<?php echo $url_helper->getReviewUrl(); ?>',
+        saveMethod: '<?php echo $url_helper->getSaveMethodUrl(); ?>',
+        failure: '<?php echo  $url_helper->getFailureUrl(); ?>'}
+    );
+
+    var billing = new Billing('co-billing-form', '<?php echo $url_helper->getAddressUrl(); ?>address/', '<?php echo $url_helper->getSaveBillingUrl(); ?>');
+    var shipping = new Shipping('co-shipping-form', '<?php echo $url_helper->getAddressUrl();  ?>address/', '<?php echo $url_helper->getSaveShippingUrl();  ?>','<?php echo $url_helper->getSaveShippingMethod(); ?>');
+    var shippingMethod = new ShippingMethod('co-shipping-method-form', "<?php echo $this->getUrl('skipcheckout/onepage/saveShippingMethod', array("_secure"=>true)) ?>");
+    var payment = new Payment('co-payment-form', '<?php echo $url_helper->getSavePaymentUrl(); ?>');
+  
+<?php
+	// this is to enable forced guest checkout
+	if (Mage::getSingleton('customer/session')->isLoggedIn() == false && 
+		$this->helper('sunarc_skipcheckout/data')->isLoginStepGuestOnly() == true 
+		) {
+?>
+		Element.hide('register-customer-password');
+	    checkout.gotoSection('billing');
+<?php
+	} // end if
+?>
+    
+//]]>
+</script>

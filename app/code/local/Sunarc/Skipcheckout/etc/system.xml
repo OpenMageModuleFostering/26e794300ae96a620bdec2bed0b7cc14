@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <sunarc translate="label">
+            <label>Sunarc</label>
+            <sort_order>1</sort_order>
+        </sunarc>
+    </tabs>
+    <!-- Admin right side  -->
+    <sections>
+        <sunarc_skipcheckout_settings>
+            <label>Customize Checkout Steps</label>
+            <tab>sunarc</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1020</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <skipcheckout>
+                    <label>Customize Checkout Settings </label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <isenabled>
+                            <label>Enable Customize Checkout Steps</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Enable Customize Checkout Steps functionality</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </isenabled>
+                        <loginstep_type>
+                            <label>Customer Login</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sunarc_skipcheckout/system_config_source_login_step</source_model>
+                            <comment></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </loginstep_type>
+                        <!-- Dropdown menu -->
+                        <default_shipping>
+                            <label>Shipping Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sunarc_skipcheckout/system_config_source_shipping_enabledmethods</source_model>
+                            <comment>The option for the default shipping method</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_shipping>
+                        <default_payment>
+                            <!-- Dropdown menu -->
+                            <label>Payment Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sunarc_skipcheckout/system_config_source_payment_enabledmethods</source_model>
+                            <comment>The option for the default payment method</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_payment>
+                    </fields>
+                </skipcheckout>
+            </groups>
+        </sunarc_skipcheckout_settings>
+    </sections>
+</config>

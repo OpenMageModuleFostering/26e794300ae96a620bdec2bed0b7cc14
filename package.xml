@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+    <name>26e794300ae96a620bdec2bed0b7cc14</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Allows customizing checkout process by skipping any of login page, shipping or payment methods.</summary>
+    <description>Allows to customize the checkout process by skipping login, shipping or payment methods helping to reduce the checkout steps enabling faster checkout.&#xD;
+You can skip any of the option or all the options altogether just through simple admin interface with enable/disable options.</description>
+    <notes>Stable version release for approval</notes>
+    <authors><author><name>Rajneesh Vyas</name><user>sunarcmagento</user><email>rajneesh.vyas@sunarctechnologies.com</email></author></authors>
+    <date>2016-08-13</date>
+    <time>11:47:43</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Sunarc_Skipcheckout.xml" hash="ca3dc5ba98d4e5b5bdb8f9f69aba8f97"/></dir></target><target name="magelocal"><dir name="Sunarc"><dir name="Skipcheckout"><dir name="Helper"><file name="Data.php" hash="1d0ec141f1aa1ce195f168f8d670e8b7"/><file name="Order.php" hash="72c4d1d2e4fee3bebde5dd25e7cd3449"/><file name="Url.php" hash="1e7b356fadffc0e0b69e8927b985477c"/></dir><dir name="Model"><file name="Observer.php" hash="2030076ab2123da626b30ded1630753c"/><dir name="System"><dir name="Config"><dir name="Source"><dir name="Login"><file name="Step.php" hash="171392b9c4174b259108a06dc7361d18"/></dir><dir name="Payment"><file name="Enabledmethods.php" hash="21b376b14c7dc9800052d587558d3b93"/></dir><dir name="Shipping"><file name="Enabledmethods.php" hash="a0ab79c3cc262296cbd2362c29990aeb"/></dir></dir></dir></dir></dir><dir name="controllers"><dir name="Adminhtml"><file name="SkipcheckoutController.php" hash="8eb53f0c88a8d4aaabd5e0c8c5e8de98"/></dir><file name="OnepageController.php" hash="81ec3a9b87c0a1e326ca401b5f99c724"/></dir><dir name="etc"><file name="adminhtml.xml" hash="d12e851fdea4fe3abe3039d488a45613"/><file name="config.xml" hash="17dbdc514b6ddf9da373c1e6ed1bf7b7"/><file name="system.xml" hash="ebdcd8c699b8402a971f78e251c3ab75"/></dir><dir name="sql"><dir name="skipcheckout_setup"><file name="install-1.0.0.php" hash="d4f7ea9ca2cb7d23d643ac5c0fd1d4f2"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="template"><dir name="sunarc"><dir name="skipcheckout"><file name="onepage.phtml" hash="b1d8d4bc4565fb182eec7cd7341d6cea"/></dir></dir></dir><dir name="layout"><dir name="sunarc"><dir name="skipcheckout"><file name="skipcheckout.xml" hash="28fd6d6feed70788be149ab7e35ce29e"/></dir></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.3.0</min><max>5.6.19</max></php></required></dependencies>
+</package>
