@@ -1,4 +1,13 @@
 <?php
+/**
+ *
+ *
+ * @category Sunarc
+ * @package Customize Checkout Steps-magento
+ * @author Sunarc Team <info@sunarctechnologies.com>
+ * @copyright Sunarc (http://sunarctechnologies.com/)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 class Sunarc_Skipcheckout_Model_Observer extends Mage_Core_Model_Observer
 {
     public function checkSkipCheckout(Varien_Event_Observer $observer)
@@ -7,6 +16,7 @@ class Sunarc_Skipcheckout_Model_Observer extends Mage_Core_Model_Observer
         if ($this->isSkipCheckoutEnabled() == false) {
             return;
         }
+
         $handles       = $observer->getEvent()->getLayout()->getUpdate()->getHandles();
         $this->_update = $observer->getEvent()->getLayout()->getUpdate();
         // find the handle we're looking for
@@ -32,7 +42,8 @@ class Sunarc_Skipcheckout_Model_Observer extends Mage_Core_Model_Observer
     protected function _loginStepHandle()
     {
         // should we remove the login step..
-        if (Mage::getSingleton('customer/session')->isLoggedIn() == false && Mage::helper('sunarc_skipcheckout/data')->isLoginStepGuestOnly() == true) {
+        if (Mage::getSingleton('customer/session')->isLoggedIn()
+            == false && Mage::helper('sunarc_skipcheckout/data')->isLoginStepGuestOnly() == true) {
             $this->getUpdate()->addHandle('sunarc_checkout_skip_forceguestonly');
         } // end
     } // end

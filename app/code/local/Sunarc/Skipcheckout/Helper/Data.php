@@ -1,4 +1,13 @@
 <?php
+/**
+ *
+ *
+ * @category Sunarc
+ * @package Customize Checkout Steps-magento
+ * @author Sunarc Team <info@sunarctechnologies.com>
+ * @copyright Sunarc (http://sunarctechnologies.com/)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
 {
     const LOGIN_STEP_DEFAULT = 0;
@@ -53,7 +62,8 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
     } // end
     public function getCustomerGroupsEnabled()
     {
-        $value = Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/customergroups_enabled');
+        $value = 
+            Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/customergroups_enabled');
         return $value;
     } // end 
     public function getShippingCustomerGroups()
@@ -61,7 +71,8 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
         if ($this->getCustomerGroupsEnabled() == 0) {
             return array();
         } // end
-        $value = Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/shipping_noskip_customergroups');
+        $value = 
+            Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/shipping_noskip_customergroups');
         $value = explode(',', $value);
         return $value;
     } // end
@@ -70,7 +81,8 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
         if ($this->getCustomerGroupsEnabled() == 0) {
             return array();
         } // end
-        $value = Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/payment_noskip_customergroups');
+        $value =
+            Mage::getStoreConfig('sunarc_skipcheckout_settings/skipcheckout_customergroups/payment_noskip_customergroups');
         $value = explode(',', $value);
         return $value;
     } // end
@@ -88,8 +100,6 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
             $groupId = Mage::getSingleton('customer/session')->getCustomerGroupId();
             return $groupId;
             //Get customer Group name
-            //$group = Mage::getModel('customer/group')->load($groupId);
-            //return $group->getCode();
         } // end
         return false;
     } // end
@@ -100,14 +110,14 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
     public function skipPaymentMethod()
     {
         $code          = $this->getPaymentMethod();
-        $noskip_groups = $this->getPaymentCustomerGroups();
-        $current_group = $this->getCurrentCustomersGroup();
+        $noskipGroups = $this->getPaymentCustomerGroups();
+        $currentGroup = $this->getCurrentCustomersGroup();
         switch ($code) {
             case "noskip":
                 $return = false;
                 break;
             default:
-                $return = $this->skipThisSection($current_group, $noskip_groups);
+                $return = $this->skipThisSection($currentGroup, $noskipGroups);
                 break;
         } // end sw
         return $return;
@@ -119,32 +129,29 @@ class Sunarc_Skipcheckout_Helper_Data extends Mage_Core_Helper_Abstract
     public function skipShippingMethod()
     {
         $code          = $this->getShippingMethod();
-        $noskip_groups = $this->getShippingCustomerGroups();
-        $current_group = $this->getCurrentCustomersGroup();
+        $noskipGroups = $this->getShippingCustomerGroups();
+        $currentGroup = $this->getCurrentCustomersGroup();
         switch ($code) {
             case "noskip":
                 $return = false;
                 break;
             default:
-                $return = $this->skipThisSection($current_group, $noskip_groups);
+                $return = $this->skipThisSection($currentGroup, $noskipGroups);
                 break;
-        } // end sw
+        }
+
         return $return;
     } // end fun
     /**
      * Returns true if we should skip this section
      *
-     * @param int $current_group customers group id
-     * @param array $noskip_groups array of groupid's
+     * @param int $currentGroup customers group id
+     * @param array $noskipGroups array of groupid's
      */
-    private function skipThisSection($current_group, $noskip_groups)
+    private function skipThisSection($currentGroup, $noskipGroups)
     {
-        //   		var_dump($current_group);
-        //   		var_dump($noskip_groups);
-        //   		var_dump(is_array($noskip_groups));
-        //   		var_dump(array_search($current_group, $noskip_groups));
         // if we find the current users groupid in the "dont skip" array, tell checkout not to skip this section
-        if ($current_group !== false && is_array($noskip_groups) && array_search($current_group, $noskip_groups) > -1) {
+        if ($currentGroup !== false && is_array($noskipGroups) && array_search($currentGroup, $noskipGroups) > -1) {
             return false;
         } // end
         return true;

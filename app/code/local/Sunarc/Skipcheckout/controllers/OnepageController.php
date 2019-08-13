@@ -1,4 +1,13 @@
 <?php
+/**
+ *
+ *
+ * @category Sunarc
+ * @package Customize Checkout Steps-magento
+ * @author Sunarc Team <info@sunarctechnologies.com>
+ * @copyright Sunarc (http://sunarctechnologies.com/)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 require_once "Mage/Checkout/controllers/OnepageController.php";
 class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageController
 {
@@ -69,10 +78,12 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
         $this->getOnepage()->getQuote()->collectTotals()->save();
         // save shipping method event
-        Mage::dispatchEvent('checkout_controller_onepage_save_shipping_method', array(
+        Mage::dispatchEvent(
+            'checkout_controller_onepage_save_shipping_method', array(
             'request' => $this->getRequest(),
             'quote' => $this->getOnepage()->getQuote()
-        ));
+            )
+        );
         $this->getOnepage()->getQuote()->setTotalsCollectedFlag(false);
         // attempt to load the next section
         if ($gotonext == true) {
@@ -93,6 +104,7 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
             $this->_ajaxRedirectResponse();
             return;
         }
+        
         // this is the default way
         $data = $this->getRequest()->getPost('payment', array());
         // override the default value if we need to
@@ -110,6 +122,7 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
         if ($redirectUrl) {
             $this->getOnepage()->getCheckout()->setRedirectUrl($redirectUrl);
         }
+        
         // attempt to load the next section
         if ($gotonext == true) {
             $result = $this->getNextSection($result, $current = 'payment');
@@ -125,6 +138,7 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
         if ($this->_expireAjax()) {
             return;
         }
+        
         if ($this->getRequest()->isPost()) {
             $data              = $this->getRequest()->getPost('shipping', array());
             $customerAddressId = $this->getRequest()->getPost('shipping_address_id', false);
@@ -146,6 +160,7 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
         if ($this->_expireAjax()) {
             return;
         }
+        
         if ($this->getRequest()->isPost()) {
             if ($this->_helper->isLoginStepGuestOnly() == true) {
                 // set the checkout method
@@ -196,9 +211,9 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
      */
     public function progressAction()
     {
-        $version_array = Mage::getVersionInfo();
+        $versionArray = Mage::getVersionInfo();
         //	Quick fix Magento 1.8 and pre 1.8 have different methods to generate the right hand progress bar.
-        if ($version_array['major'] == 1 && $version_array['minor'] < 8) {
+        if ($versionArray['major'] == 1 && $versionArray['minor'] < 8) {
             return $this->preV8ProgressAction();
         } // end 
         return parent::progressAction();
@@ -246,7 +261,8 @@ class Sunarc_Skipcheckout_OnepageController extends Mage_Checkout_OnepageControl
                         'name' => 'review',
                         'html' => $this->_getReviewHtml()
                     );
-                } elseif ($this->_helper->skipShippingMethod() == true && $this->_helper->skipPaymentMethod() == false) {
+                } elseif ($this->_helper->skipShippingMethod() ==
+                    true && $this->_helper->skipPaymentMethod() == false) {
                     $result['goto_section']   = 'payment';
                     $result['allow_sections'] = array(
                         'payment'
