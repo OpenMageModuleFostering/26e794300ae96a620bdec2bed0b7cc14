@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/26e794300ae96a620bdec2bed0b7cc14",
+    "name": "OpenMageModuleFostering\/26e794300ae96a620bdec2bed0b7cc14",
     "type": "magento-module",
     "license": "OSL-v3.0",
     "homepage": "",
     "description": "The extension allows process by skipping any of the login page, shipping or payment methods. ",
     "authors": [
-    {
-        "name": "Rajneesh Vyas",
-        "email": "rajneesh.vyas@sunarctechnologies.com"
-    }
-],
+        {
+            "name": "Rajneesh Vyas",
+            "email": "rajneesh.vyas@sunarctechnologies.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
